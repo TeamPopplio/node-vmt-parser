@@ -1,2 +1,5 @@
 # Node-VMT-JSON-Converter
-NodeJS Module that Converts VMT (Valve Material Type)- Files to JSON Arrays.
+Pure Javascript (NodeJS) module for deserialization from VMT that works just like JSON
+
+VMT (Valve Material  Type) is Valve's File Format to store Material Infomation for their Shaders.
+(Learn more about VMT here: https://developer.valvesoftware.com/wiki/Material)
