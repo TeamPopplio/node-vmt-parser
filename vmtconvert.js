@@ -39,7 +39,7 @@ class VMTConvert {
 						}
 						retArr[key] = tArr;
 					} else if(value.includes(".")){//Its a Decimal! (Float)
-						if(value.startsWith(".")) value = "0"+val;
+						if(value.startsWith(".")) value = "0"+value;
 						retArr[key] = parseFloat(value);
 					} else if(!isNaN(value)){//Its a Integer!
 						retArr[key] = parseInt(value);
