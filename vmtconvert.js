@@ -5,8 +5,9 @@ function isNullOrEmpty(value) {
 }
 
 function isRelevantLine(value) {
-	return (!isNullOrEmpty(value) && value.startsWith("$"));
+	return (!isNullOrEmpty(value) && (value.startsWith("$") || value.startsWith("\"$")));
 }
+//TAB:	
 
 class VMTConvert {
 	//https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters
@@ -23,10 +24,14 @@ class VMTConvert {
 				}
 				let lines = contents.replace(/\t/g, "").replace(/\r/g, "").split("\n").filter(line => isRelevantLine(line));
 				for(let line of lines) {
-					let key = line.substring(line.lastIndexOf("$") + 1, line.indexOf(" "));
-					let value = line.replace(" ", "").replace("$", "").replace(key, "").replace(/\r/g, "");
-					if(value.includes("\"[") && value.includes("]\"")){//Its a Array!
-						let tArr = value.replace("\"[", "").replace("]\"", "").split(" ").filter(e => !isNullOrEmpty(e));
+					line = line.replace(/\"\"/g, "  ").replace(/\"/g, " ").toLowerCase();
+					let startKey = line.indexOf("$");
+					line = line.substring(startKey, line.length);
+					let endKeySpace_Tab = line.indexOf(" ", startKey);
+					let key = line.substring(startKey, endKeySpace_Tab).replace("$", "")
+					let value = line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim();					
+					if(value.includes("[") && value.includes("]")){//Its a Array!
+						let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));
 						for (let a = 0; a < tArr.length; a++) {
 							let val = tArr[a];
 							if(!isNaN(val)) tArr[a] = parseInt(val);//Its a Integer!
@@ -41,7 +46,7 @@ class VMTConvert {
 					} else {//Its a String or something unsupported..
 						value = value.replace(/\"/g, "");
 						value = value.replace(/\\/g, "/");
-						retArr[key] = value;
+						retArr[key] = value.toLowerCase();
 					}
 				}
 				resolve(retArr);
