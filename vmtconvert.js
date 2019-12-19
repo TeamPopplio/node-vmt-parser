@@ -7,7 +7,6 @@ function isNullOrEmpty(value) {
 function isRelevantLine(value) {
 	return (!isNullOrEmpty(value) && (value.startsWith("$") || value.startsWith("\"$")));
 }
-//TAB:	
 
 class VMTConvert {
 	//https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters
@@ -22,7 +21,7 @@ class VMTConvert {
 					resolve(retArr);
 					return;
 				}
-				let lines = contents.replace(/\t/g, "").replace(/\r/g, "").split("\n").filter(line => isRelevantLine(line));
+				let lines = contents.replace(/\t/g, " ").replace(/\r/g, "").split("\n").filter(line => isRelevantLine(line.trim()));
 				for(let line of lines) {
 					line = line.replace(/\"\"/g, "  ").replace(/\"/g, " ").toLowerCase();
 					let startKey = line.indexOf("$");

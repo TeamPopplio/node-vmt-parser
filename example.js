@@ -1,6 +1,6 @@
 const vmt = require('./VMTConvert');
 
-var data = vmt.parseVMT("cs20_2old_glossy.vmt").then((content) => {
+var data = vmt.parseVMT("astr_holo.vmt").then((content) => {
     console.log(content);
 });
 
