@@ -16,6 +16,7 @@ class VMTConvert {
 			fs.stat(vmtFile, function(err, stat) {
 				if(err == null) {
 					fs.readFile(vmtFile, 'utf8', function(err, contents) {
+						if(contents == null || contents == undefined) resolve(null);
 						let retArr={};
 						let lines = contents.replace(/\t/g, "").split("\r\n").filter(line => isRelevantLine(line));
 						for(let line of lines) {
