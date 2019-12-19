@@ -44,6 +44,7 @@ class VMTConvert {
 					} else if(!isNaN(value)){//Its a Integer!
 						retArr[key] = parseInt(value);
 					} else {//Its a String or something unsupported..
+						value = value.toString();
 						value = value.replace(/\"/g, "");
 						value = value.replace(/\\/g, "/");
 						retArr[key] = value.toLowerCase();
