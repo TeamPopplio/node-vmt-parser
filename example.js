@@ -1,9 +1,8 @@
 const vmt = require('./VMTConvert');
 
-var data = vmt.parseVMT("astr_holo.vmt").then((content) => {
+vmt.parseVMT("basilisk.vmt").then((content) => {
     console.log(content);
 });
-
-var data = vmt.parseVMT("astr_gold.vmt").then((content) => {
+vmt.parseVMT("astr_holo.vmt").then((content) => {
     console.log(content);
 });

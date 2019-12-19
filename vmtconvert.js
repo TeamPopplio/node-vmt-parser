@@ -17,7 +17,6 @@ class VMTConvert {
 				let contents = fs.readFileSync(vmtFile, 'utf8');
 				let retArr={};
 				if(contents == null || contents == undefined){ 
-					conslole.log("FILE EMPTY! - "+contents);
 					resolve(retArr);
 					return;
 				}
@@ -27,7 +26,7 @@ class VMTConvert {
 					let startKey = line.indexOf("$");
 					line = line.substring(startKey, line.length);
 					let endKeySpace_Tab = line.indexOf(" ", startKey);
-					let key = line.substring(startKey, endKeySpace_Tab).replace("$", "")
+					let key = line.substring((line.startsWith("$")?startKey-1:startKey), endKeySpace_Tab).replace("$", "");
 					let value = line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim();					
 					if(value.includes("[") && value.includes("]")){//Its a Array!
 						let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));

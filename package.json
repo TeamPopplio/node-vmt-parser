@@ -1,15 +1,40 @@
 {
-  "name": "node-vmt-parser",
-  "version": "1.0.3",
+  "_from": "node-vmt-parser@1.0.3",
+  "_id": "node-vmt-parser@1.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-gQQBQdam+9vrNbb2VjYm1x6mD90sHAEFqd7s8SWnFJ80TF8TTp5FMYKAyMkLpWbGNimAWEITOrXYyA5NwaiFLQ==",
+  "_location": "/node-vmt-parser",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "node-vmt-parser@1.0.3",
+    "name": "node-vmt-parser",
+    "escapedName": "node-vmt-parser",
+    "rawSpec": "1.0.3",
+    "saveSpec": null,
+    "fetchSpec": "1.0.3"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/node-vmt-parser/-/node-vmt-parser-1.0.3.tgz",
+  "_shasum": "26a552e5fedf3598f5fdec446eedd365af26b327",
+  "_spec": "node-vmt-parser@1.0.3",
+  "_where": "H:\\01_Projekte\\01_SkinShot.io - Online CSGO 3D Weapon Inspect\\03 Dev\\05_StickerCDN",
+  "author": {
+    "name": "Luis Falkenhan",
+    "email": "github@luis-falkenhan.de",
+    "url": "https://luis-falkenhan.de"
+  },
+  "bugs": {
+    "url": "https://github.com/LuisFalk/node-vmt-parser/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "Pure Javascript (NodeJS) module for deserialization from VMT that works just like JSON",
-  "main": "vmtconvert.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LuisFalk/node-vmt-parser.git"
-  },
+  "homepage": "https://github.com/LuisFalk/node-vmt-parser#readme",
   "keywords": [
     "valve",
     "vmt",
@@ -22,10 +47,15 @@
     "material",
     "parser"
   ],
-  "author": "Luis Falkenhan <github@luis-falkenhan.de> (https://luis-falkenhan.de)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/LuisFalk/node-vmt-parser/issues"
+  "main": "vmtconvert.js",
+  "name": "node-vmt-parser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisFalk/node-vmt-parser.git"
   },
-  "homepage": "https://github.com/LuisFalk/node-vmt-parser#readme"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.3"
 }
