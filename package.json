@@ -1,6 +1,6 @@
 {
-  "_from": "node-vmt-parser@1.0.3",
-  "_id": "node-vmt-parser@1.0.3",
+  "_from": "node-vmt-parser@1.0.4",
+  "_id": "node-vmt-parser@1.0.4",
   "_inBundle": false,
   "_integrity": "sha512-gQQBQdam+9vrNbb2VjYm1x6mD90sHAEFqd7s8SWnFJ80TF8TTp5FMYKAyMkLpWbGNimAWEITOrXYyA5NwaiFLQ==",
   "_location": "/node-vmt-parser",
@@ -8,20 +8,20 @@
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "node-vmt-parser@1.0.3",
+    "raw": "node-vmt-parser@1.0.4",
     "name": "node-vmt-parser",
     "escapedName": "node-vmt-parser",
-    "rawSpec": "1.0.3",
+    "rawSpec": "1.0.4",
     "saveSpec": null,
-    "fetchSpec": "1.0.3"
+    "fetchSpec": "1.0.4"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/node-vmt-parser/-/node-vmt-parser-1.0.3.tgz",
+  "_resolved": "https://registry.npmjs.org/node-vmt-parser/-/node-vmt-parser-1.0.4.tgz",
   "_shasum": "26a552e5fedf3598f5fdec446eedd365af26b327",
-  "_spec": "node-vmt-parser@1.0.3",
+  "_spec": "node-vmt-parser@1.0.4",
   "_where": "H:\\01_Projekte\\01_SkinShot.io - Online CSGO 3D Weapon Inspect\\03 Dev\\05_StickerCDN",
   "author": {
     "name": "Luis Falkenhan",
@@ -57,5 +57,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
