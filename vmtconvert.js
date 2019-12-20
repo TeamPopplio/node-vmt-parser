@@ -5,8 +5,20 @@ function isNullOrEmpty(value) {
 }
 
 function isRelevantLine(value) {
-	return (!isNullOrEmpty(value) && (value.startsWith("$") || value.startsWith("\"$")));
+	value = removeLeadingCharsUntil("$", value);
+	return (!isNullOrEmpty(value) && value.startsWith("$"));
 }
+
+function removeLeadingCharsUntil(allowed_char, data_string) {
+	while(data_string.length > 0 && data_string[0] != allowed_char) data_string = data_string.substr(1);
+	return data_string;
+}
+
+function removeTrailingCharsAfter(seperator, data_string) {
+	if(data_string.length > 0 && data_string.indexOf(seperator) >= 0) data_string = data_string.substr(0, data_string.indexOf(seperator));
+	return data_string;
+}
+
 
 class VMTConvert {
 	//https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters
@@ -22,12 +34,13 @@ class VMTConvert {
 				}
 				let lines = contents.replace(/\t/g, " ").replace(/\r/g, "").split("\n").filter(line => isRelevantLine(line.trim()));
 				for(let line of lines) {
+					line = removeLeadingCharsUntil("$", line);
 					line = line.replace(/\"\"/g, "  ").replace(/\"/g, " ").toLowerCase();
 					let startKey = line.indexOf("$");
 					line = line.substring(startKey, line.length);
 					let endKeySpace_Tab = line.indexOf(" ", startKey);
-					let key = line.substring((line.startsWith("$")?startKey-1:startKey), endKeySpace_Tab).replace("$", "");
-					let value = line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim();					
+					let key = line.substring(startKey-1, endKeySpace_Tab).replace("$", "");
+					let value = removeTrailingCharsAfter("//", line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim());					
 					if(value.includes("[") && value.includes("]")){//Its a Array!
 						let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));
 						for (let a = 0; a < tArr.length; a++) {
