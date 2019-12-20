@@ -58,10 +58,8 @@ class VMTConvert {
 						retArr[key] = tArr;
 					} else if(isFloat(value)){//Its a Decimal! (Float)
 						if(value.startsWith(".")) value = "0"+value;
-						console.log("parseFloat:" + value);
 						retArr[key] = parseFloat(value);
 					} else if(isInteger(value)){//Its a Integer!
-					console.log("parseInt:" + value);
 						retArr[key] = parseInt(value);
 					} else {//Its a String or something unsupported..
 						value = value.toString();
