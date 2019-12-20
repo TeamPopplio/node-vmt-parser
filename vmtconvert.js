@@ -19,6 +19,13 @@ function removeTrailingCharsAfter(seperator, data_string) {
 	return data_string;
 }
 
+function isFloat(n) {
+    return parseFloat(n) == n 
+}
+
+function isInteger(n) {
+	return parseInt(n) == n 
+};
 
 class VMTConvert {
 	//https://developer.valvesoftware.com/wiki/Category:List_of_Shader_Parameters
@@ -49,10 +56,12 @@ class VMTConvert {
 							if(val.startsWith(".")) tArr[a] = parseFloat("0"+val);//Its a Float!
 						}
 						retArr[key] = tArr;
-					} else if(value.includes(".")){//Its a Decimal! (Float)
+					} else if(isFloat(value)){//Its a Decimal! (Float)
 						if(value.startsWith(".")) value = "0"+value;
+						console.log("parseFloat:" + value);
 						retArr[key] = parseFloat(value);
-					} else if(!isNaN(value)){//Its a Integer!
+					} else if(isInteger(value)){//Its a Integer!
+					console.log("parseInt:" + value);
 						retArr[key] = parseInt(value);
 					} else {//Its a String or something unsupported..
 						value = value.toString();
