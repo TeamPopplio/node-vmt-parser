@@ -52,8 +52,12 @@ class VMTConvert {
 						let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));
 						for (let a = 0; a < tArr.length; a++) {
 							let val = tArr[a];
-							if(!isNaN(val)) tArr[a] = parseInt(val);//Its a Integer!
-							if(val.startsWith(".")) tArr[a] = parseFloat("0"+val);//Its a Float!
+							if(isFloat(val)) {//Its a Decimal! (Float)
+								if(val.startsWith(".")) val = "0" + val;
+								tArr[a] = parseFloat(val);
+							} else if(isInteger(val)){//Its a Integer!
+								tArr[a] = parseInt(val);
+							}
 						}
 						retArr[key] = tArr;
 					} else if(isFloat(value)){//Its a Decimal! (Float)
