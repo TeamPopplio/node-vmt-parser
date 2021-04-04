@@ -16,7 +16,7 @@ function removeLeadingCharsUntil(allowed_char, data_string) {
 
 function removeTrailingCharsAfter(seperator, data_string) {
 	if(data_string.length > 0 && data_string.indexOf(seperator) >= 0) data_string = data_string.substr(0, data_string.indexOf(seperator));
-	return data_string;
+	return data_string;	
 }
 
 function isFloat(n) {
@@ -41,35 +41,37 @@ class VMTConvert {
 				}
 				let lines = contents.replace(/\t/g, " ").replace(/\r/g, "").split("\n").filter(line => isRelevantLine(line.trim()));
 				for(let line of lines) {
-					line = removeLeadingCharsUntil("$", line);
-					line = line.replace(/\"\"/g, "  ").replace(/\"/g, " ").toLowerCase();
-					let startKey = line.indexOf("$");
-					line = line.substring(startKey, line.length);
-					let endKeySpace_Tab = line.indexOf(" ", startKey);
-					let key = line.substring(startKey-1, endKeySpace_Tab).replace("$", "");
-					let value = removeTrailingCharsAfter("//", line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim());					
-					if(value.includes("[") && value.includes("]")){//Its a Array!
-						let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));
-						for (let a = 0; a < tArr.length; a++) {
-							let val = tArr[a];
-							if(isFloat(val)) {//Its a Decimal! (Float)
-								if(val.startsWith(".")) val = "0" + val;
-								tArr[a] = parseFloat(val);
-							} else if(isInteger(val)){//Its a Integer!
-								tArr[a] = parseInt(val);
+					if(!line.includes("toggletexturevar") && !line.includes("animatedtexturevar")) { //This is a proxied texture, temporary solution!
+						line = removeLeadingCharsUntil("$", line);
+						line = line.replace(/\"\"/g, "  ").replace(/\"/g, " ").toLowerCase();
+						let startKey = line.indexOf("$");
+						line = line.substring(startKey, line.length);
+						let endKeySpace_Tab = line.indexOf(" ", startKey);
+						let key = line.substring(startKey-1, endKeySpace_Tab).replace("$", "");
+						let value = removeTrailingCharsAfter("//", line.replace(" ", "").replace("$", "").replace("\"", "").replace(key, "").replace(/\r/g, "").replace(" ", "").trim());					
+						if(value.includes("[") && value.includes("]")){//Its a Array!
+							let tArr = value.replace("[", "").replace("]", "").split(" ").filter(e => !isNullOrEmpty(e));
+							for (let a = 0; a < tArr.length; a++) {
+								let val = tArr[a];
+								if(isFloat(val)) {//Its a Decimal! (Float)
+									if(val.startsWith(".")) val = "0" + val;
+									tArr[a] = parseFloat(val);
+								} else if(isInteger(val)){//Its a Integer!
+									tArr[a] = parseInt(val);
+								}
 							}
+							retArr[key] = tArr;
+						} else if(isFloat(value)){//Its a Decimal! (Float)
+							if(value.startsWith(".")) value = "0"+value;
+							retArr[key] = parseFloat(value);
+						} else if(isInteger(value)){//Its a Integer!
+							retArr[key] = parseInt(value);
+						} else {//Its a String or something unsupported..
+							value = value.toString();
+							value = value.replace(/\"/g, "");
+							value = value.replace(/\\/g, "/");
+							retArr[key] = value.toLowerCase();
 						}
-						retArr[key] = tArr;
-					} else if(isFloat(value)){//Its a Decimal! (Float)
-						if(value.startsWith(".")) value = "0"+value;
-						retArr[key] = parseFloat(value);
-					} else if(isInteger(value)){//Its a Integer!
-						retArr[key] = parseInt(value);
-					} else {//Its a String or something unsupported..
-						value = value.toString();
-						value = value.replace(/\"/g, "");
-						value = value.replace(/\\/g, "/");
-						retArr[key] = value.toLowerCase();
 					}
 				}
 				resolve(retArr);
